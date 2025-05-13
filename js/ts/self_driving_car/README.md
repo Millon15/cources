@@ -174,19 +174,8 @@ tsc && node index.js
 ## Expected output
 
 ```shell
-Starting autonomous driving...
-Obstacle events: { ObstacleLeft: true, ObstacleRight: false }
-Obstacle on the left detected. Turning right.
-Executing: turn right
-Braking. Car stopped.
----
-Obstacle events: { ObstacleLeft: false, ObstacleRight: true }
-Obstacle on the right detected. Turning left.
 Executing: turn left
-Braking. Car stopped.
----
-Obstacle events: { ObstacleLeft: true, ObstacleRight: false }
-Obstacle on the left detected. Turning right.
 Executing: turn right
-Braking. Car stopped.
+Executing: turn right
+Executing: turn left
 ```
