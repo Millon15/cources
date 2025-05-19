@@ -17,8 +17,8 @@ The Codecademy TypeScript course covers:
 The subdirectories within this folder represent various projects or modules from the course, demonstrating practical application of TypeScript concepts.
 
 - [Park Service Volunteer](./park_service_volunteer/README.md)
-- [Pixel Smile](./pixel_smile/README.md)
-- [Restaurant Orders](./restaurant_orders/README.md)
+- [Pixel Smile](./pixel_smile)
+- [Restaurant Orders](./restaurant_orders)
 - [Self Driving Car](./self_driving_car/README.md)
-- [Spread Function Call](./spread_function_call/README.md)
+- [Spread Function Call](./spread_function_call)
 - [Unionversity](./unionversity/README.md)
