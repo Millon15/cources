@@ -37,3 +37,4 @@ Key features of Scrimba's React course:
 The subdirectories within this folder represent various projects or modules from the course, demonstrating practical application of **React** concepts.
 
 - [ReactFacts](./ReactFacts/README.md)
+- [TravelJournal](./TravelJournal/README.md)
