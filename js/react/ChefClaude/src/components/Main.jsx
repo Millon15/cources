@@ -6,20 +6,24 @@ import { getRecipeFromChefClaude, getRecipeFromMistral } from "../ai"
 export default function Main() {
     const [ingredients, setIngredients] = React.useState([])
     const [recipe, setRecipe] = React.useState("")
+    const newIngredientInputRef = React.useRef(null)
 
     async function getRecipe() {
         setRecipe(await getRecipeFromMistral(ingredients))
     }
 
     function addIngredient(formData) {
-        const newIngredient = formData.get("ingredient");
+        const newIngredient = formData.get("ingredient")?.trim() ?? "";
+
         if (
             newIngredient &&
             !ingredients.some(
-                ing => ing.trim().toLowerCase() === newIngredient.trim().toLowerCase()
+                ing => ing.toLowerCase() === newIngredient.toLowerCase()
             )
         ) {
-            setIngredients(prevIngredients => [...prevIngredients, newIngredient.trim()]);
+            setIngredients(prevIngredients => [...prevIngredients, newIngredient]);
+
+            newIngredientInputRef?.current?.focus();
         }
     }
 
@@ -33,21 +37,25 @@ export default function Main() {
         <main>
             <form action={addIngredient} className="add-ingredient-form">
                 <input
+                    ref={newIngredientInputRef}
                     type="text"
                     placeholder="e.g. oregano"
                     aria-label="Add ingredient"
                     name="ingredient"
                 />
+
                 <button>Add ingredient</button>
             </form>
 
-            {ingredients.length > 0 ? (
-                <IngredientsList
+            {ingredients.length > 0
+                ? <IngredientsList
                     ingredients={ingredients}
                     getRecipe={getRecipe}
                     onRemoveIngredient={handleRemoveIngredient}
                 />
-            ) : undefined}
+                : <p className="empty-ingredients-message">
+                    No ingredients added yet. Add at least <bold>3</bold> above to get a recipe!
+                </p>}
 
             {recipe ? <ClaudeRecipe recipe={recipe} /> : undefined}
         </main>

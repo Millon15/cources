@@ -1,13 +1,4 @@
 export default function IngredientsList(props) {
-    if (!props.ingredients || props.ingredients.length === 0) {
-        return (
-            <section>
-                <h2>Ingredients on hand:</h2>
-                <p className="empty-ingredients-message">No ingredients added yet. Add at least 3 - to get started!</p>
-            </section>
-        );
-    }
-
     return (
         <section>
             <h2>Ingredients on hand:</h2>
@@ -27,7 +18,7 @@ export default function IngredientsList(props) {
                 ))}
             </ul>
 
-            {props.ingredients.length > 3 ? (
+            {props.ingredients.length >= 3 ? (
                 <div className="get-recipe-container">
                     <div>
                         <h3>Ready for a recipe?</h3>
