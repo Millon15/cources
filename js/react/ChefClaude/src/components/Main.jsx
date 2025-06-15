@@ -4,19 +4,29 @@ import ClaudeRecipe from "./ClaudeRecipe"
 import { getRecipeFromChefClaude, getRecipeFromMistral } from "../ai"
 
 export default function Main() {
-    const [ingredients, setIngredients] = React.useState(
-        ["chicken", "all the main spices", "corn", "heavy cream", "pasta"]
-    )
+    const [ingredients, setIngredients] = React.useState([])
     const [recipe, setRecipe] = React.useState("")
 
     async function getRecipe() {
-        const recipeMarkdown = await getRecipeFromMistral(ingredients)
-        setRecipe(recipeMarkdown)
+        setRecipe(await getRecipeFromMistral(ingredients))
     }
 
     function addIngredient(formData) {
-        const newIngredient = formData.get("ingredient")
-        setIngredients(prevIngredients => [...prevIngredients, newIngredient])
+        const newIngredient = formData.get("ingredient");
+        if (
+            newIngredient &&
+            !ingredients.some(
+                ing => ing.trim().toLowerCase() === newIngredient.trim().toLowerCase()
+            )
+        ) {
+            setIngredients(prevIngredients => [...prevIngredients, newIngredient.trim()]);
+        }
+    }
+
+    function handleRemoveIngredient(indexToRemove) {
+        setIngredients(prevIngredients =>
+            prevIngredients.filter((_, index) => index !== indexToRemove)
+        );
     }
 
     return (
@@ -31,14 +41,15 @@ export default function Main() {
                 <button>Add ingredient</button>
             </form>
 
-            {ingredients.length > 0 &&
+            {ingredients.length > 0 ? (
                 <IngredientsList
                     ingredients={ingredients}
                     getRecipe={getRecipe}
+                    onRemoveIngredient={handleRemoveIngredient}
                 />
-            }
+            ) : undefined}
 
-            {recipe && <ClaudeRecipe recipe={recipe} />}
+            {recipe ? <ClaudeRecipe recipe={recipe} /> : undefined}
         </main>
     )
 }
