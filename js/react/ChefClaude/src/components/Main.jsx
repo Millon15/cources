@@ -9,18 +9,18 @@ export default function Main() {
     const newIngredientInputRef = React.useRef(null)
 
     async function getRecipe() {
-        setRecipe(await getRecipeFromMistral(ingredients))
+        setRecipe(
+            await getRecipeFromMistral(ingredients)
+        )
     }
 
     function addIngredient(formData) {
         const newIngredient = formData.get("ingredient")?.trim() ?? "";
+        const isDuplicate = ingredients.some(
+            ing => ing.toLowerCase() === newIngredient.toLowerCase()
+        );
 
-        if (
-            newIngredient &&
-            !ingredients.some(
-                ing => ing.toLowerCase() === newIngredient.toLowerCase()
-            )
-        ) {
+        if (newIngredient && !isDuplicate) {
             setIngredients(prevIngredients => [...prevIngredients, newIngredient]);
 
             newIngredientInputRef?.current?.focus();

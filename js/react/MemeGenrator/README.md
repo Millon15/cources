@@ -1,4 +1,4 @@
-# Chef Claude
+# Meme Generator
 
 [//]: # (TODO fill in the README with project details, components, technologies used, and learning outcomes.)
 

@@ -1,4 +1,4 @@
-# ReactFacts
+# React Facts
 
 A simple React application that displays fun facts about React.
 
