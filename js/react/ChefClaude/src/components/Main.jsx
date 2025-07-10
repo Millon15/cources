@@ -7,12 +7,16 @@ export default function Main() {
     const [ingredients, setIngredients] = React.useState([])
     const [recipe, setRecipe] = React.useState("")
     const newIngredientInputRef = React.useRef(null)
+    const recipeRef = React.useRef(null)
 
     async function getRecipe() {
         setRecipe(
             await getRecipeFromMistral(ingredients)
         )
     }
+    React.useEffect(() => {
+        recipeRef?.current?.scrollIntoView({behavior: "smooth"})
+    }, [recipe])
 
     function addIngredient(formData) {
         const newIngredient = formData.get("ingredient")?.trim() ?? "";
@@ -54,10 +58,10 @@ export default function Main() {
                     onRemoveIngredient={handleRemoveIngredient}
                 />
                 : <p className="empty-ingredients-message">
-                    No ingredients added yet. Add at least <bold>3</bold> above to get a recipe!
+                    No ingredients added yet. Add at least <b>3</b> above to get a recipe!
                 </p>}
 
-            {recipe ? <ClaudeRecipe recipe={recipe} /> : undefined}
+            {recipe ? <ClaudeRecipe ref={recipeRef} recipe={recipe} /> : undefined}
         </main>
     )
 }

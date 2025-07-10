@@ -60,7 +60,7 @@ export default function Main() {
             </div>
 
             <div className="meme">
-                <img src={meme.imageUrl} />
+                <img src={meme.imageUrl} alt="meme image"/>
                 <span className="top">{meme.topText}</span>
                 <span className="bottom">{meme.bottomText}</span>
             </div>
